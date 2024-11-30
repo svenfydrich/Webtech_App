@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernweh</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <img class="logo" src="./assets/globe-icon.png" alt="Fernweh Logo">
+    <h1>Fernweh</h1>
+    <nav>
+        <a href="index.html" aria-current="page">Alle Reisen anzeigen</a>
+        <a href="add-travel.html">Reise anlegen</a>
+    </nav>
+</header>
+<main>
+    <h2>Meine Reisen</h2>
+    <div id="travels-list" role="list">
+        <p class="loading-text">Lade Reisen...</p>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

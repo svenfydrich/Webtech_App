@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+
+body {
+    font-family: Parkinsans, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #333;
+}
+
+header {
+    background-color: #5baaba;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a[aria-current="page"] {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2rem;
+}
+
+h1 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input,
+form textarea,
+form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+form button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #5ebce0;
+}
+
+img.logo {
+    width: 80px;
+    display: block;
+    margin: 0.5rem auto -2rem auto;
+}
+
+.travel {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.travel h3 {
+    font-size: 1.2rem;
+    color: #2a2a2a;
+    margin-bottom: 0.5rem;
+}
+
+.travel p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    form input,
+    form textarea,
+    form button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .travel {
+        padding: 0.8rem;
+    }
+
+    .travel h3 {
+        font-size: 1rem;
+    }
+
+    .travel p {
+        font-size: 0.8rem;
+    }
+}

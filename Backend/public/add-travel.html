@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reise anlegen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <img class="logo" src="./assets/globe-icon.png" alt="Fernweh Logo">
+    <h1>Fernweh</h1>
+    <nav>
+        <a href="index.html">Alle Reisen anzeigen</a>
+        <a href="add-travel.html" aria-current="page">Reise anlegen</a>
+    </nav>
+</header>
+<main>
+    <h3>Hier kannst du deine neue Reise planen! Fülle alle Felder aus und klicke unten auf Reise hinzufügen.</h3>
+    <form id="add-travel-form">
+        <fieldset>
+            <legend>Reise Details</legend>
+            <label for="country">Land:</label>
+            <input type="text" id="country" name="country" placeholder="z.B. Italien" required>
+
+            <label for="duration">Dauer (in Tagen):</label>
+            <input type="number" id="duration" name="duration" placeholder="z.B. 7" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Städte</legend>
+            <label for="cities">Städte (z.B. Rom,3; Florenz,2):</label>
+            <textarea id="cities" name="cities" placeholder="Stadt,Tage; z.B. Rom,3; Florenz,2" required></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Reiseführer</legend>
+            <label for="guideName">Name:</label>
+            <input type="text" id="guideName" name="guideName" placeholder="z.B. Max Mustermann" required>
+
+            <label for="guideLanguages">Sprachen (z.B. Deutsch, Englisch):</label>
+            <input type="text" id="guideLanguages" name="guideLanguages" placeholder="z.B. Deutsch, Englisch" required>
+
+            <label for="guideEmail">E-Mail:</label>
+            <input type="email" id="guideEmail" name="guideEmail" placeholder="z.B. max@example.com" required>
+
+            <label for="guidePhone">Telefon:</label>
+            <input type="text" id="guidePhone" name="guidePhone" placeholder="z.B. +4915123456789" required>
+        </fieldset>
+
+        <button type="submit">Reise hinzufügen</button>
+    </form>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
