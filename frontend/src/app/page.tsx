@@ -1,22 +1,35 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100">
       <header className="bg-white shadow-md">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Fernweh Reiseplaner</h1>
-          <nav>
+        <div className="container mx-auto px-4 py-4 flex items-center">
+          <div className="flex items-center">
+            <Image
+              src="/globe-icon.png"
+              alt="Fernweh Logo"
+              width={50}
+              height={50}
+              className=""
+            />
+            <h1 className="text-2xl font-bold text-blue-600 ml-2">Fernweh</h1>
+          </div>
+          <nav className="ml-auto">
             <ul className="flex space-x-4">
               <li>
                 <Link href="/travels" legacyBehavior>
-                  <a className="text-blue-500 hover:text-blue-700">Reiseverwaltung</a>
+                  <a className="text-blue-500 hover:text-blue-700">
+                    Reiseverwaltung
+                  </a>
                 </Link>
               </li>
               <li>
                 <Link href="/comingsoon" legacyBehavior>
-                  <a className="text-blue-500 hover:text-blue-700">Mehr Funktionen</a>
+                  <a className="text-blue-500 hover:text-blue-700">
+                    Mehr Funktionen
+                  </a>
                 </Link>
               </li>
             </ul>
@@ -26,14 +39,17 @@ export default function Home() {
 
       <main className="container mx-auto px-4 py-10">
         <section className="text-center">
-          <h2 className="text-4xl font-bold text-blue-800 mb-6">Willkommen beim Reiseplaner</h2>
+          <h2 className="text-4xl font-bold text-blue-800 mb-6">
+            Willkommen beim Fernweh Reiseplaner!
+          </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Planen und verwalten Sie Ihre Reisen ganz einfach mit unserem Tool.
+            Plane und verwalte deine nächsten Abenteuer ganz einfach mit unserem
+            neuen Tool.
           </p>
           <Image
-            src="/frontend/public/travel-image.jpg"
+            src="/travel-image.jpg"
             alt="Reisebanner"
-            width={800}
+            width={600}
             height={400}
             className="rounded-lg shadow-lg mx-auto"
           />
