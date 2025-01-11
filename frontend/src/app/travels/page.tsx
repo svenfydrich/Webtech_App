@@ -17,7 +17,7 @@ interface Guide {
 }
 
 interface Travel {
-  id: number;
+  _id: string;
   country: string;
   duration: number;
   cities: CityVisit[];
@@ -31,7 +31,6 @@ const axiosInstance = axios.create({
 export default function Travels() {
   const [travels, setTravels] = useState<Travel[]>([]);
   const [formData, setFormData] = useState<Travel>({
-    id: 0,
     country: "",
     duration: 0,
     cities: [{ cityName: "", daysSpent: 0 }],
@@ -56,14 +55,18 @@ export default function Travels() {
     e.preventDefault();
 
     try {
+      const { _id, ...dataToSend } = formData;
+      console.log("Daten, die gesendet werden:", dataToSend);
+
       if (isEditMode) {
-        await axiosInstance.put(`/travels/${formData.id}`, formData);
+        await axiosInstance.put(`/travels/${_id}`, dataToSend);
       } else {
-        await axiosInstance.post("/travels", formData);
+        console.log("Gesendete Daten: ", formData);
+        await axiosInstance.post("/travels", dataToSend);
       }
 
       setFormData({
-        id: 0,
+        _id: "",
         country: "",
         duration: 0,
         cities: [{ cityName: "", daysSpent: 0 }],
@@ -81,9 +84,9 @@ export default function Travels() {
     setIsEditMode(true);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (_id: string) => {
     try {
-      await axiosInstance.delete(`/travels/${id}`);
+      await axiosInstance.delete(`/travels/${_id}`);
       fetchTravels();
     } catch (error) {
       console.error("Fehler beim Löschen der Reise:", error);
@@ -271,9 +274,9 @@ export default function Travels() {
         </thead>
         <tbody>
           {travels.map((travel) => (
-            <tr key={travel.id} className="hover:bg-gray-100">
+            <tr key={travel._id} className="hover:bg-gray-100">
               <td className="border p-2 text-center text-gray-800">
-                {travel.id}
+                {travel._id}
               </td>
               <td className="border p-2 text-center text-gray-800">
                 {travel.country}
@@ -302,7 +305,7 @@ export default function Travels() {
                   ✏️
                 </button>
                 <button
-                  onClick={() => handleDelete(travel.id)}
+                  onClick={() => handleDelete(travel._id)}
                   className="bg-red-600 text-white px-2 py-1 rounded"
                 >
                   🗑️

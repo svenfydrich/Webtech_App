@@ -1,75 +1,100 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+import Travel, { ITravel } from "../models/Travel";
+import axios from "axios";
 
-interface CityVisit {
-    cityName: string;
-    daysSpent: number;
-}
-
-interface Guide {
-    name: string;
-    languages: string[];
-    phone: string;
-    email: string;
-}
-
-interface Travel {
-    id: number;
-    country: string;
-    duration: number;
-    cities: CityVisit[];
-    tourGuide: Guide;
-}
-
-let travels: Travel[] = [];
+// error-handler
+const handleUnexpectedError = (
+  err: unknown,
+  res: Response,
+  message: string
+): void => {
+  console.error(message, err);
+  res.status(500).json({ error: message });
+};
 
 // GET ALL
-export const getAllTravels = (req: Request, res: Response): void => {
+export const getAllTravels = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const travels = await Travel.find();
     res.json(travels);
+  } catch (err) {
+    handleUnexpectedError(
+      err,
+      res,
+      "Failed to fetch travels. Please try again later."
+    );
+  }
 };
 
 // CREATE NEW TRAVEL
-export const createTravel = (req: Request, res: Response): void => {
-    const { country, duration, cities, tourGuide } = req.body;
-
-    // Neue Reise erstellen
-    const newTravel: Travel = {
-        id: travels.length + 1,
-        country,
-        duration,
-        cities,
-        tourGuide,
-    };
-
-    // Reise zur Liste hinzufügen
-    travels.push(newTravel);
+export const createTravel = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    console.log("Empfange Daten: ", req.body);
+    const travelData: ITravel = req.body;
+    const newTravel = new Travel(travelData);
+    await newTravel.save();
+    console.log("Erfolgreich gespeichert: ", newTravel);
     res.status(201).json(newTravel);
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      console.error("Fehler beim Speichern der Reise:", err.response?.data); // Zeigt die genaue Antwort des Backends
+    } else {
+      handleUnexpectedError(
+        err,
+        res,
+        "Failed to save travel. Please try again later."
+      );
+    }
+  }
 };
 
 // UPDATE TRAVEL
-export const updateTravel = (req: Request, res: Response): void => {
+export const updateTravel = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
     const { id } = req.params;
-    const { country, duration, cities, tourGuide } = req.body;
-
-    const travelIndex = travels.findIndex(travel => travel.id === parseInt(id, 10));
-    if (travelIndex === -1) {
-        res.status(404).json({ msg: 'Reise nicht gefunden' });
-        return;
+    const travelData: Partial<ITravel> = req.body;
+    const updatedTravel = await Travel.findByIdAndUpdate(id, travelData, {
+      new: true,
+    });
+    if (!updatedTravel) {
+      res.status(404).json({ error: "Travel not found" });
+    } else {
+      res.json(updatedTravel);
     }
-
-    travels[travelIndex] = { ...travels[travelIndex], country, duration, cities, tourGuide };
-    res.json(travels[travelIndex]);
+  } catch (err) {
+    console.log("Error updating travel: ", err);
+    res
+      .status(400)
+      .json({ error: "Failed to update travel. Please check your input." });
+  }
 };
 
 // DELETE TRAVEL
-export const deleteTravel = (req: Request, res: Response): void => {
+export const deleteTravel = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
     const { id } = req.params;
-
-    const travelIndex = travels.findIndex(travel => travel.id === parseInt(id, 10));
-    if (travelIndex === -1) {
-        res.status(404).json({ msg: 'Reise nicht gefunden' });
-        return;
+    const deletedTravel = await Travel.findByIdAndDelete(id);
+    if (!deletedTravel) {
+      res.status(404).json({ error: "Travel not found" });
+    } else {
+      res.json({ message: "Travel deleted successfully" });
     }
-
-    travels.splice(travelIndex, 1);
-    res.status(204).send();
+  } catch (err) {
+    console.log("Error deleting travel: ", err);
+    res
+      .status(400)
+      .json({ error: "Failed to delete travel. Please check your input." });
+  }
 };
