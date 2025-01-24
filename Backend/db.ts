@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Database setup
 const connectDB = async (): Promise<void> => {
   try {
     const dbURI =

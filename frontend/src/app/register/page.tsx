@@ -17,6 +17,7 @@ export default function RegisterPage() {
   };
 
   const handleRegister = async () => {
+    // Prüft E-Mail input (code-schnipsel aus projektmodul web)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {

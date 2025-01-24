@@ -66,7 +66,7 @@ export default function Home() {
 
       <footer className="bg-blue-600 text-white py-4 mt-10">
         <div className="container mx-auto text-center">
-          <p>&copy; 2024 Reiseplaner. Alle Rechte vorbehalten.</p>
+          <p>&copy; 2025 Reiseplaner. Alle Rechte vorbehalten.</p>
         </div>
       </footer>
     </div>

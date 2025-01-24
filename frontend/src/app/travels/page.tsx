@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface CityVisit {
   cityName: string;
@@ -29,6 +29,7 @@ const axiosInstance = axios.create({
 });
 
 export default function Travels() {
+  const router = useRouter();
   const [travels, setTravels] = useState<Travel[]>([]);
   const [formData, setFormData] = useState<Travel>({
     country: "",
@@ -41,6 +42,10 @@ export default function Travels() {
   useEffect(() => {
     fetchTravels();
   }, []);
+
+  const handleBack = async () => {
+    router.back();
+  };
 
   const fetchTravels = async () => {
     try {
@@ -116,9 +121,13 @@ export default function Travels() {
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="mb-4">
-        <Link href="/" legacyBehavior>
-          <a className="text-blue-500 hover:underline"> ← Zurück zu Fernweh</a>
-        </Link>
+        <a
+          onClick={handleBack}
+          className="text-blue-500 hover:underline cursor-pointer"
+        >
+          {" "}
+          ← Zurück zu Fernweh
+        </a>
       </div>
       <h1 className="text-3xl font-bold text-center mb-8 text-gray-900">
         Reiseverwaltung

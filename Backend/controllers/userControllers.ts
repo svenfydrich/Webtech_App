@@ -2,6 +2,7 @@ import { Response } from "express";
 import { AuthenticatedRequest } from "../middlewares/authenticateToken";
 import User from "../models/User";
 
+// User-authentication + error-handling
 export const getUser = async (
   req: AuthenticatedRequest,
   res: Response

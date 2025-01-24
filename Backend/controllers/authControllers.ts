@@ -3,9 +3,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
 
+// Login + Register authentication controllers
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { firstName, lastName, email, password } = req.body;
 
+  // Some error-handling (ich habe hier code-schnipsel aus meiner Registrierung/Login von Projektmodul Web wiederverwendet)
   try {
     if (!firstName || !lastName || !email || !password) {
       res.status(400).json({ message: "Alle Felder sind erforderlich." });
@@ -32,7 +34,6 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({ message: "Registrierung erfolgreich." });
   } catch (err) {
-    console.error("Fehler bei der Registrierung:", err);
     res.status(500).json({ message: "Serverfehler." });
   }
 };
@@ -41,6 +42,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
 
   try {
+    // Den Ansatz mit cleanedEmail habe ich aufgrund von Query-Problemen in MongoDB probiert
     const cleanedEmail = email.trim().toLowerCase();
     const user = await User.findOne({ email: cleanedEmail });
 
@@ -55,6 +57,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    // Sign JWT
     const token = jwt.sign(
       {
         userId: user._id,
@@ -66,7 +69,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     res.status(200).json({ message: "Login erfolgreich", token });
   } catch (err) {
-    console.error("Fehler beim Login:", err);
     res.status(500).json({ message: "Serverfehler." });
   }
 };

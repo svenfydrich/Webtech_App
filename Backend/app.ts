@@ -1,21 +1,19 @@
-// app.ts
 import express, { Application } from "express";
 import travelRoutes from "./routes/travels";
 import cors from "cors";
 import connectDB from "./db";
 import dotenv from "dotenv";
 
+// Route imports
 import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 
-dotenv.config(); // Ensure environment variables are loaded
-
-const jwtSecret: string = process.env.JWT_SECRET || "defaultSecret";
+// Server configuration
+dotenv.config();
 const port: number = parseInt(process.env.PORT || "1337", 10);
-
 const app: Application = express();
 
-// Configure Middleware and Routes
+// Middleware and Routes
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.static("public"));

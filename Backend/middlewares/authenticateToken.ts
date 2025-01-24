@@ -9,6 +9,7 @@ export interface AuthenticatedRequest extends Request {
   user?: CustomJwtPayload | string;
 }
 
+// Token-authentication + error-handling
 export const authenticateToken = (
   req: AuthenticatedRequest,
   res: Response,
