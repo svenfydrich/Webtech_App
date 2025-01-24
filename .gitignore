@@ -56,3 +56,4 @@ Frontend/dist/
 Frontend/**/*.log
 
 yarn.lock
+*.zip
